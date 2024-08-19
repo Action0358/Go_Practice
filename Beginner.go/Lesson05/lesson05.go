@@ -4,7 +4,7 @@ import "fmt"
 
 func main() {
 	a := [3]string{"sato", "suzuki", "takahashi"} // 変数名 := [要素数]データ型{配列データ1, 配列データ2, ...}
-	a[1] = "tanaka"                               // インデックス1のデータを変更（suzuki→tanaka）
+	a[1] = "tanaka"                               // インデックス1のデータを変更(suzuki→tanaka)
 
 	b := [...]string{"sato", "suzuki", "takahashi"} //要素数の省略形式[...]
 
