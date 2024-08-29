@@ -14,7 +14,7 @@ func main() {
 	fmt.Println(reflect.TypeOf(string_a))
 	fmt.Println(reflect.TypeOf(string_b))
 
-	fmt.Println(string_a[0]) // 要素番号はbyte配列で出力される
+	fmt.Println(string_a[0]) // インデックス番号はbyte配列で出力される
 
 	byteA := []byte{72, 69, 76, 76, 79}
 	fmt.Println(byteA)
