@@ -3,14 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	n := 1
-	switch n {
-	case 1, 2:
-		fmt.Println("1 or 2")
-	case 3, 4:
-		fmt.Println("3 or 4")
+	x := "apple"
+	switch x { // switch = 複数の条件に基づいて分岐処理を行う制御構文
+	case "apple", "banana", "peach":
+		fmt.Println("x is a fruit")
+	case "carrot", "celery", "beet":
+		fmt.Println("x is a vegetable")
 	default:
-		fmt.Println("I don't know")
-
+		fmt.Println("x is not a fruit or a vegetable")
 	}
 }
