@@ -20,6 +20,6 @@ func main() {
 	fmt.Println(reflect.TypeOf(num3))
 	fmt.Println(reflect.TypeOf(num4))
 
-	fmt.Printf("%T\n", num1)        // "%T\n"はデータ型を確かめる書式
+	fmt.Printf("%T\n", num1)        // "%T"はデータ型を確かめる書式, \nは改行を意味する
 	fmt.Printf("%T\n", int32(num1)) // int32に変換することができる
 }

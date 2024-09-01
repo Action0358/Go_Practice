@@ -12,4 +12,12 @@ func main() {
 	default:
 		fmt.Println("x is not a fruit or a vegetable")
 	}
+
+	n := 6
+	switch {
+	case n > 0 && n < 4:
+		fmt.Println("0 < n < 4")
+	case n > 3 && n < 7:
+		fmt.Println("3 < n <7")
+	}
 }
