@@ -6,12 +6,12 @@ func main() {
 	// 整数型のチャネルを宣言
 	var ch chan int
 	// チャネルを初期化 (バッファなしのチャネル)
-	ch = make(chan int)
+	ch = make(chan int)  // 整数型のデータをやり取りするためのチャネルを作成する
 	fmt.Println(cap(ch)) // cap 関数でチャネルのバッファ容量を確認 (バッファなしなので 0 が出力される)
 
 	// バッファ付きのチャネルを作成（バッファサイズは5）
-	ch2 := make(chan int, 5)
-	fmt.Println(cap(ch2)) // バッファ容量 5 が出力される
+	ch2 := make(chan int, 5) // 最大5つの整数データを蓄えることができるバッファ付きチャネルを作成
+	fmt.Println(cap(ch2))    // バッファ容量 5 が出力される
 
 	// チャネルに値を送信（バッファにデータを格納）
 	ch2 <- 1
