@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-// reciever 関数は、チャネル ch からデータを受信して出力する
-func reciever(ch chan int) { // 整数型データを送受信するチャネル ch を引数として定義する
+// receive 関数は、チャネル ch からデータを受信して出力する
+func receive(ch chan int) { // 整数型データを送受信するチャネル ch を引数として定義する
 	for {
 		// チャネルからデータを受信し、変数 i に格納
 		i := <-ch
@@ -20,8 +20,8 @@ func main() {
 	// 整数型のチャネルを作成
 	ch := make(chan int)
 
-	// 別のゴルーチンで reciever 関数を実行し、並列処理を開始
-	go reciever(ch) // reciever 関数がバックグラウンドで並行して動作
+	// 別のゴルーチンで receive 関数を実行し、並列処理を開始
+	go receive(ch) // receive 関数がバックグラウンドで並行して動作
 
 	i := 0
 	for i < 100 {
