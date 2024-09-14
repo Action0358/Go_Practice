@@ -18,5 +18,6 @@ func main() {
 	*p = 20
 
 	// aの値が変更されたことを確認
+	fmt.Println("a after p", p) // 変数の値が変更されてもメモリアドレス自体は変わらない
 	fmt.Println("a after *p = 20:", a)
 }
