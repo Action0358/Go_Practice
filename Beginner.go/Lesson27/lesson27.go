@@ -3,11 +3,13 @@ package main
 import "fmt"
 
 type Student struct {
-	name          string
-	math, english float64
+	name          string  // フィールド
+	math, english float64 //　フィールド
 }
 
-func (s Student) avg() { // メソッド定義(変数名sを記述することで構造体のフィールドを使用することができる)、(s Student)をレシーバと言う
+// avg メソッド定義(変数名sを記述することで構造体のフィールドを使用することができる)、(s Student)をレシーバと言う
+// avg() は 関数の一種（メソッド） であり、s Student というレシーバを通じて、Student 型のデータにアクセスできる
+func (s Student) avg() {
 	fmt.Println(s.name, (s.math + s.english/2))
 }
 

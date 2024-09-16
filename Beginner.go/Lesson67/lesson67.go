@@ -2,43 +2,46 @@ package main
 
 import "fmt"
 
-// 組み込みの error インターフェース
-// errorは標準ライブラリに含まれており、定義しなくてもerror型を扱うことができる
-/* type error interface {
-    Error() string
-} */
+// 標準ライブラリに定義されている error インターフェース
+// インターフェースを実装するためには、Error()メソッドを持つ構造体を定義する必要がある
+/*
+	type error interface {
+		Error() string
+	}
+*/
 
-// MyError 構造体: エラーメッセージとエラーコードを保持するカスタムエラー型
+// MyError 構造体: カスタムエラーの型
 type MyError struct {
 	Message string // エラーメッセージ
 	ErrCode int    // エラーコード
 }
 
-// eはレシーバー変数で、Error メソッドが *MyError型のインスタンスに対して実行される
-// Error メソッド: MyError 構造体が error インターフェースを実装するためのメソッド(MyError 型を error として扱える)
-// string 型によって、このメソッドはエラーメッセージを返します
-func (e *MyError) Error() string {
-	return e.Message // エラーメッセージを返す
+// Error メソッド: error インターフェースを実装するためのメソッド
+// エラーメッセージを返す
+func (e *MyError) Error() string { // e.Message の値が string 型なので、string の戻り値型として string を定義
+	return e.Message
 }
 
-// RaisError 関数: カスタムエラーを発生させる関数
-// error インターフェースを返すため、エラーとして扱える
-func RaisError() error {
-	// &MyError によりポインタ型の MyError を返す
+// RaisError 関数: カスタムエラーを生成して返す
+// 戻り値として MyError 型のポインタを返すため、MyError が error インターフェースを実装している必要がある
+func RaisError() error { // error は戻り値の型
 	return &MyError{Message: "カスタムエラーが発生しました", ErrCode: 1234}
 }
 
 func main() {
-	// エラーを発生させて err という変数に代入
+	// カスタムエラーを発生させて err に代入
 	err := RaisError()
 
-	// エラーメッセージを表示 (エラーインターフェースの Error メソッドが呼ばれる)
-	fmt.Println(err.Error()) // 出力: カスタムエラーが発生しました
+	// err に対し Error() メソッドより MyError の Message フィールドを返し表示する
+	fmt.Println(err.Error())
 
-	// 型アサーション: err が MyError 型であるかどうかをチェック
-	e, ok := err.(*MyError)
-	if ok {
-		// err が MyError 型ならば、エラーコードを表示する
-		fmt.Println(e.ErrCode) // 出力: 1234
+	// 型アサーションで、err が MyError 型かを確認
+	if e, ok := err.(*MyError); ok {
+		// MyError 型ならエラーコードを表示
+		fmt.Println(e.ErrCode)
 	}
 }
+
+// lesson24.go 参照
+// lesson27.go 参照
+// lesson57.go 参照
