@@ -10,7 +10,7 @@ type Person struct {
 
 // ToString メソッドを Person 構造体に実装
 func (p *Person) ToString() string {
-	return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age)
+	return fmt.Sprintf("Name: %s, Age: %d", p.Name, p.Age) // %s は文字列に、%d は整数を表すフォーマット指定子
 }
 
 // Car 構造体

@@ -2,7 +2,7 @@ package main
 
 import "fmt"
 
-// 標準ライブラリに定義されている error インターフェース
+//　error インターフェースは標準ライブラリ
 // インターフェースを実装するためには、Error()メソッドを持つ構造体を定義する必要がある
 /*
 	type error interface {

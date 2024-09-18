@@ -10,6 +10,7 @@ type Person struct {
 
 // Personに対して自己紹介を行うIntroduceメソッドを定義
 func (p Person) Introduce() {
+	// Printf はフォーマット指定子を使って、データをカスタマイズして表示
 	fmt.Printf("Hi, my name is %s and I am %d years old.\n", p.Name, p.Age) // %s は文字列に、%d は整数を表すフォーマット指定子
 }
 
