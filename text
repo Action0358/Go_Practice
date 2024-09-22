@@ -1,0 +1,31 @@
+developブランチの最新データを main ブランチに反映させるための手順 
+
+developブランチにいる場合
+最初に作業中のブランチが develop ブランチであることを確認しておきます。もしそうでなければ、develop ブランチに切り替える
+
+git checkout develop
+
+developブランチを最新に更新
+リモートの develop ブランチを最新にするため、pull を行う
+
+git pull origin develop
+
+mainブランチに切り替え
+最新の develop ブランチを main ブランチに反映させるため、main ブランチに切り替える
+
+git checkout main
+
+mainブランチを最新に更新
+main ブランチをリモートから最新状態にする
+
+git pull origin main
+
+developブランチをマージ
+develop ブランチの変更を main ブランチにマージする
+
+git merge mac
+
+mainブランチをリモートにプッシュ
+最後に、ローカルの main ブランチをリモートにプッシュする
+
+git push origin main
