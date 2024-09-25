@@ -1,3 +1,5 @@
+// 数学的な関数や定数を提供する標準ライブラリ
+
 package main
 
 import (
@@ -39,8 +41,6 @@ func main() {
 	sineValue := math.Sin(radians)
 	fmt.Printf("Sine of %.2f radians is %.2f\n", radians, sineValue)
 }
-
-// 数学的な関数や定数を提供する標準ライブラリ
 
 // %f：浮動小数点数（float32 または float64）を表示する指定子
 // .2：小数点以下の桁数を指定する部分であり、小数点以下2桁を指す

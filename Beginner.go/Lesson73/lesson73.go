@@ -21,5 +21,4 @@ func main() {
 	}
 }
 
-// 実行コマンド
-// go run lesson73.go first second third
+// 実行コマンド : go run lesson73.go first second third

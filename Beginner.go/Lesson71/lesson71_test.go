@@ -19,4 +19,4 @@ func TestAdd(t *testing.T) {
 	}
 }
 
-// 実行コマンド go test
+// 実行コマンド : go test

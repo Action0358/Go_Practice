@@ -5,4 +5,4 @@ func Add(a, b int) int {
 	return a + b
 }
 
-// 実行コマンド go test
+// 実行コマンド : go test
