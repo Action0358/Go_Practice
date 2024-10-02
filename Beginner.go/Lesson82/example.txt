@@ -1,0 +1,3 @@
+Go is great
+I love programming
+File reading is easy
