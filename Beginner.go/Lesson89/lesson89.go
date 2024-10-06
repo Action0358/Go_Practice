@@ -12,75 +12,51 @@ import (
 // GoでのAES暗号化
 
 func main() {
-	// 暗号化したいデータ
+	// 暗号化するメッセージ（このメッセージが金庫に入る）
 	plaintext := []byte("This is a secret message")
 
-	// 暗号化・復号化に使う32バイトのキー（AES-256）
+	// 32バイトの鍵（鍵のサイズはAESの種類によって16, 24, 32バイトが必要）
 	key := []byte("thisis32bitlongpassphraseimusing")
 
-	// AES-GCMモードでの暗号化を行う
-	encrypted, err := encryptAESGCM(plaintext, key)
+	// AESブロックを作成（金庫の準備）
+	block, err := aes.NewCipher(key)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Encrypted (hex): %s\n", hex.EncodeToString(encrypted))
 
-	// 暗号化されたデータを復号化する
-	decrypted, err := decryptAESGCM(encrypted, key)
+	// GCMモードを使う（特別な鍵のかけ方）
+	aesGCM, err := cipher.NewGCM(block)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Printf("Decrypted: %s\n", decrypted)
+
+	// ノンス（乱数ロックの番号）を作成
+	nonce := make([]byte, aesGCM.NonceSize())                  // ノンス（Nonce）**という一時的な値（乱数のようなもの）を生成
+	if _, err := io.ReadFull(rand.Reader, nonce); err != nil { // ノンスをランダムな値で埋める
+		panic(err)
+	}
+
+	// メッセージを暗号化（データを金庫に入れる）
+	ciphertext := aesGCM.Seal(nil, nonce, plaintext, nil) // ノンスをランダムな値で埋める
+
+	// 暗号化されたデータを16進数で表示（中身を見やすくする）
+	fmt.Printf("Encrypted (hex): %s\n", hex.EncodeToString(ciphertext))
+
+	// 復号化（金庫からメッセージを取り出す）
+	decryptedText, err := aesGCM.Open(nil, nonce, ciphertext, nil)
+	if err != nil {
+		panic(err)
+	}
+
+	// 復号化したメッセージを表示
+	fmt.Printf("Decrypted: %s\n", decryptedText)
 }
 
-// AES-GCMモードで暗号化
-func encryptAESGCM(plaintext, key []byte) ([]byte, error) {
-	// AESブロックを作成
-	block, err := aes.NewCipher(key)
-	if err != nil {
-		return nil, err
-	}
-
-	// GCMモードの作成
-	aesGCM, err := cipher.NewGCM(block)
-	if err != nil {
-		return nil, err
-	}
-
-	// ノンス（nonce）の生成
-	nonce := make([]byte, aesGCM.NonceSize())
-	if _, err = io.ReadFull(rand.Reader, nonce); err != nil {
-		return nil, err
-	}
-
-	// 暗号化
-	ciphertext := aesGCM.Seal(nonce, nonce, plaintext, nil)
-	return ciphertext, nil
-}
-
-// AES-GCMモードで復号化
-func decryptAESGCM(ciphertext, key []byte) ([]byte, error) {
-	// AESブロックを作成
-	block, err := aes.NewCipher(key)
-	if err != nil {
-		return nil, err
-	}
-
-	// GCMモードの作成
-	aesGCM, err := cipher.NewGCM(block)
-	if err != nil {
-		return nil, err
-	}
-
-	// ノンスサイズを取得
-	nonceSize := aesGCM.NonceSize()
-	nonce, ciphertext := ciphertext[:nonceSize], ciphertext[nonceSize:]
-
-	// 復号化
-	plaintext, err := aesGCM.Open(nil, nonce, ciphertext, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return plaintext, nil
-}
+/*
+	•	AESは「金庫そのもの」
+	•	cipherは「金庫の鍵のかけ方」
+	•	randは「金庫のランダムなロック番号」
+	•	hexは「金庫の中身を見やすくする変換ツール」
+	•	fmtは「金庫に何が入っているかを報告するメッセージ」
+	•	ioは「金庫にデータを入れるための道具」
+*/

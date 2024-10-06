@@ -16,7 +16,7 @@ func main() {
 
 	fmt.Println(string_a[0]) // インデックス番号はbyte配列で出力される
 
-	byteA := []byte{72, 69, 76, 76, 79}
+	byteA := []byte{72, 69, 76, 76, 79} // []byte は、データ（文字列や画像、音声...）を細かい単位（バイト）で扱うためのツール
 	fmt.Println(byteA)
 
 	fmt.Println(string(byteA)) // byte配列を文字型で出力するように変換するとHELLOになる
